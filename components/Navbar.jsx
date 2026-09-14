@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUser } from "@/context/UserContext";
+import { useAuth } from "@/context/AuthContext";
 import { useFavorite } from "@/context/FavoriteContext";
 
 import { cn } from "@/lib/utils";
@@ -14,12 +15,18 @@ const links = [
   { href: "/services", label: "Services" },
   { href: "/profile", label: "Profile" },
   { href: "/contact", label: "Contact" },
-  { href: "/login", label: "Login" },
 ];
+
+const pillLinkClass = (isActive) =>
+  cn(
+    "rounded-full px-3 py-1.5 transition-colors hover:text-foreground",
+    isActive && "bg-foreground/10 text-foreground"
+  );
 
 export default function Navbar() {
   const pathname = usePathname();
   const { name, submitted } = useUser();
+  const { isLoggedIn } = useAuth();
   const { favorites } = useFavorite();
 
   const favoritesLink = {
@@ -38,7 +45,7 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-1 text-sm text-muted-foreground sm:flex">
-          {[...links, favoritesLink].map((link) => {
+          {links.map((link) => {
             const isActive =
               link.href === "/"
                 ? pathname === "/"
@@ -48,15 +55,40 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={cn(
-                  "rounded-full px-3 py-1.5 transition-colors hover:text-foreground",
-                  isActive && "bg-foreground/10 text-foreground"
-                )}
+                className={pillLinkClass(isActive)}
               >
                 {link.label}
               </Link>
             );
           })}
+
+          {isLoggedIn ? (
+            <form
+              action="/auth/signout"
+              method="post"
+            >
+              <button
+                type="submit"
+                className={pillLinkClass(false)}
+              >
+                Logout
+              </button>
+            </form>
+          ) : (
+            <Link
+              href="/login"
+              className={pillLinkClass(pathname?.startsWith("/login"))}
+            >
+              Login
+            </Link>
+          )}
+
+          <Link
+            href={favoritesLink.href}
+            className={pillLinkClass(pathname?.startsWith(favoritesLink.href))}
+          >
+            {favoritesLink.label}
+          </Link>
         </div>
         {submitted && <span>Hi, {name} 👋</span>}
         <Link
