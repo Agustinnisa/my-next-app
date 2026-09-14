@@ -26,7 +26,9 @@ export async function signup(formData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/login");
+  redirect(
+    `/login?message=${encodeURIComponent("Sign up berhasil! Silakan login.")}`
+  );
 }
 
 export async function login(formData) {

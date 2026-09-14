@@ -1,10 +1,14 @@
+import { CheckCircle2 } from "lucide-react";
+
 import { login, signup } from "./actions";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function LoginPage() {
+export default async function LoginPage({ searchParams }) {
+  const { message } = await searchParams;
+
   return (
     <section className="relative">
       <div className="bg-grid bg-radial-fade absolute inset-0 -z-10" />
@@ -19,6 +23,13 @@ export default function LoginPage() {
             Login untuk melihat daftar favorite kamu, atau buat akun baru.
           </p>
         </div>
+
+        {message && (
+          <div className="mt-6 flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/10 px-4 py-3 text-sm text-primary">
+            <CheckCircle2 className="size-4 shrink-0" />
+            {message}
+          </div>
+        )}
 
         <Card className="mt-10 border border-white/10 bg-foreground/[0.03]">
           <CardContent>
