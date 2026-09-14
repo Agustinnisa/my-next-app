@@ -17,7 +17,7 @@ export function FavoriteProvider({ children }) {
     const res = await fetch("/api/favorites", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
+      body: JSON.stringify({ user_id: user.id }),
     });
 
     if (res.ok) {
@@ -30,12 +30,12 @@ export function FavoriteProvider({ children }) {
     const res = await fetch(`/api/favorites/${userId}`, { method: "DELETE" });
 
     if (res.ok) {
-      setFavorites((prev) => prev.filter((f) => f.id !== userId));
+      setFavorites((prev) => prev.filter((f) => f.user_id !== userId));
     }
   }
 
   function isFavorite(userId) {
-    return favorites.some((f) => f.id === userId);
+    return favorites.some((f) => f.user_id === userId);
   }
 
   const value = { favorites, addFavorite, removeFavorite, isFavorite };
