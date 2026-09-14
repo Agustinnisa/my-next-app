@@ -57,11 +57,16 @@ export default function LoginPage() {
               </div>
 
               <div className="flex gap-3 pt-2">
-                <Button formAction={login} className="flex-1 rounded-full">
+                <Button
+                  type="submit"
+                  formAction={login}
+                  className="flex-1 rounded-full"
+                >
                   Login
                 </Button>
 
                 <Button
+                  type="submit"
                   formAction={signup}
                   variant="outline"
                   className="flex-1 rounded-full"
