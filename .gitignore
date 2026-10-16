@@ -32,6 +32,9 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+.env.local
+backend/.env
 
 # vercel
 .vercel
@@ -39,3 +42,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# --- TAMBAHAN UNTUK PYTHON & BACKEND RAG ---
+
+# Python
+backend/.venv/
+__pycache__/
+*.py[cod]
+
+# Local vector index
+backend/data/chroma/
