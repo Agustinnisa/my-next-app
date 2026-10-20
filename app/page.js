@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Code2, Palette, Sparkles, Users2 } from "lucide-react";
+import { ArrowRight, Code2, Palette, Sparkles, Users2, Compass } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
@@ -53,23 +53,28 @@ export default function Home() {
 
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
               We help individuals and businesses build modern, simple, and
-              useful digital experiences.
+              useful digital experiences, powered by advanced AI and modern web tools.
             </p>
 
+            {/* Tombol utama disamakan dengan warna tombol putih "Get in touch" di atas */}
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <Link
-                href="/services"
-                className={cn(buttonVariants({ size: "lg" }), "rounded-full px-6 shadow-lg shadow-primary/20")}
+                href="/recommendations"
+                className={cn(
+                  buttonVariants({ size: "lg" }),
+                  "rounded-full px-6 bg-white text-black hover:bg-white/90 font-semibold shadow-lg shadow-white/10"
+                )}
               >
-                Explore Services
-                <ArrowRight className="size-4" />
+                <Compass className="size-4 mr-2" />
+                Try Our Recommendation System
+                <ArrowRight className="size-4 ml-1" />
               </Link>
 
               <Link
                 href="/contact"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
-                  "rounded-full px-6"
+                  "rounded-full px-6 border-white/20 bg-background/50 hover:bg-white/10 text-foreground"
                 )}
               >
                 Contact Us
@@ -126,11 +131,11 @@ export default function Home() {
               href="/contact"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "mt-8 rounded-full px-6"
+                "mt-8 rounded-full px-6 bg-white text-black hover:bg-white/90 font-semibold"
               )}
             >
               Get in touch
-              <ArrowRight className="size-4" />
+              <ArrowRight className="size-4 ml-1" />
             </Link>
           </div>
         </div>
